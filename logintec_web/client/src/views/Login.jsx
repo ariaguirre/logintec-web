@@ -42,7 +42,7 @@ export function Login() {
                     required
                     />
             </div>
-            <button>Iniciar sesión</button>
+            <button className={styles.btn}>Iniciar sesión</button>
         </form>
 
     </div>

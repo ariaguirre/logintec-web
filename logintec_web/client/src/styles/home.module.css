@@ -1,10 +1,15 @@
 .header {
-    margin-bottom: 20px; 
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-    font-size: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-bottom: 20px; 
+  font-size: 30px;
+  background-color: #571b34; 
+  color: #ffff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-left: -1rem;
+  margin-top: -1rem;
   }
 
 .menus{
@@ -31,3 +36,21 @@
     background-color: #411427; 
   }
 
+
+.opButtons{
+  width: 100px; 
+  padding: 10px; 
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: #dddbdc; 
+  color: #411427; 
+  border: none; 
+  border-radius: 7px;
+  cursor: pointer;   
+  margin-bottom: 15px;   
+  margin-top: 12px;   
+  margin-right: 12px;   
+}
+.opButtons:hover {
+  background-color: #c4bfc1; 
+}

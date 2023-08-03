@@ -1,6 +1,9 @@
+body{
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
 .header {
     margin-bottom: 20px; 
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-size: 30px;
     background-color: #571b34; 
     color: #ffff;
@@ -11,4 +14,19 @@
     width: 100%;
     margin-left: -1rem;
     margin-top: -1rem;
+  }
+
+  .btn {
+    width: 200px; 
+    padding: 10px; 
+    background-color: #571b34; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    margin-right: 19px;
+  }
+  
+  .btn:hover {
+    background-color: #411427; 
   }

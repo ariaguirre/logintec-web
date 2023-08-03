@@ -33,7 +33,7 @@
 
   }
   
-  button {
+  .btn {
     width: 50%; 
     padding: 10px; 
     background-color: #571b34; 
@@ -43,7 +43,7 @@
     cursor: pointer; 
   }
   
-  button:hover {
+  .btn:hover {
     background-color: #411427; 
   }
   
