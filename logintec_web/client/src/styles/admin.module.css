@@ -1,0 +1,14 @@
+.header {
+    margin-bottom: 20px; 
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    background-color: #571b34; 
+    color: #ffff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-left: -1rem;
+    margin-top: -1rem;
+  }
