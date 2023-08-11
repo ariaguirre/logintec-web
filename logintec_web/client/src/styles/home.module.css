@@ -157,7 +157,8 @@ body{
   width: 20%; 
   padding: 10px; 
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 500;
   background-color: #f7f4f4; 
   color: #411427; 
   border: 1px solid #e4e1e1; 

@@ -54,7 +54,7 @@ export function Home() {
                   <input type='text'/>
                   </div>
                   </div>
-                  <button className={styles.boton}>Actualizar fecha y hora</button>
+                  <button className={styles.boton}>Actualizar</button>
                   <br/>
                     <h3>Rango de ángulos</h3>
                   <div className={styles.formGroup}>
