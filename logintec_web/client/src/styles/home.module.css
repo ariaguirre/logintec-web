@@ -1,5 +1,75 @@
+body{
+  background-color:#f0f0f0;
+}
+
+.allCont{
+  /* border: 2px solid green; */
+  height: 45rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.container{
+  position: fixed;
+  left: 0;
+  margin-top: -1rem;
+  height: 100%;
+  width: 22%; 
+  background-color: #fff; 
+  box-shadow: -5px 0px 10px rgba(0, 0, 0, 10); 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px; 
+  padding: 20px;
+}
+
+.config{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  /* border: 2px solid blue; */
+  /* background-color: rgba(0, 0, 0, 0.5);  */
+  position: relative;
+  top: 1rem;
+  width: 40%;
+  height: 100%;
+  margin-left: 30%;
+}
+
+.config form {
+  margin-top: -3rem;
+  /* border: 2px solid blue; */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.config label {
+  display: block;
+  margin-bottom: 5px;
+}
+.config select{
+  width: 30%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.config input {
+  width: 30%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .header {
-  margin-bottom: 20px; 
   font-size: 30px;
   background-color: #571b34; 
   color: #ffff;
@@ -36,15 +106,26 @@
     background-color: #411427; 
   }
 
+.btnCont{
+  /* border: 2px solid red; */
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5rem;
+}
 
 .opButtons{
-  width: 100px; 
+  width: 150px; 
   padding: 10px; 
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   background-color: #dddbdc; 
   color: #411427; 
   border: none; 
+  font-weight: bold;
   border-radius: 7px;
   cursor: pointer;   
   margin-bottom: 15px;   
@@ -53,4 +134,57 @@
 }
 .opButtons:hover {
   background-color: #c4bfc1; 
+}
+
+.activeButton {
+  background-color: #3d051c;
+  color: #ffff; 
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.angleInput {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.boton{
+  width: 20%; 
+  padding: 10px; 
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: #f7f4f4; 
+  color: #411427; 
+  border: 1px solid #e4e1e1; 
+  border-radius: 7px;
+  cursor: pointer;   
+  margin-bottom: 10px;   
+}
+.boton:hover {
+  background-color: #d1cbcd; 
+}
+
+.actBoton{
+  width: 30%; 
+  padding: 10px; 
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #f7f4f4; 
+  color: #411427; 
+  border: 1px solid #e4e1e1; 
+  border-radius: 7px;
+  cursor: pointer;   
+  margin-bottom: 10px;   
+  margin-top: 30px;   
+  margin-left: 33%;   
+}
+
+.actBoton:hover {
+  background-color: #d1cbcd; 
 }
