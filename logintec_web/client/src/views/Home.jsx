@@ -1,33 +1,71 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
-import styles from '../styles/home.module.css'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from '../styles/home.module.css';
 
 export function Home() {
   const [opButtons, setOpButtons] = useState(false);
   const [configBtn, setConfigBtn] = useState(false);
-  
+
   const handleOpButtons = () => {
+    if(configBtn==true) setConfigBtn(false);
     setOpButtons(!opButtons);
-  }
+  };
 
   const handleConfigBtn = () => {
+    if(opButtons==true) setOpButtons(false);
     setConfigBtn(!configBtn);
-  }
+  };
 
-    return (
-      <div>
-        <h1 className={styles.header}>Home page (cliente autorizado)</h1>
-        <div className={styles.container}>
+  return (
+    <div>
+      <h1 className={styles.header}>Home page (cliente autorizado)</h1>
+      <div className={styles.container}>
         <div className={styles.menus}>
-            <button className={`${styles.btn} ${configBtn ? styles.activeButton : ''}`} onClick={handleConfigBtn}>Configuración de sensores</button>
-            <button className={`${styles.btn} ${opButtons ? styles.activeButton : ''}`} onClick={handleOpButtons}>Operación</button>
+          <button className={`${styles.btn} ${configBtn ? styles.activeButton : ''}`} onClick={handleConfigBtn}>
+            Configuración de sensores
+          </button>
+          <button className={`${styles.btn} ${opButtons ? styles.activeButton : ''}`} onClick={handleOpButtons}>
+            Operación
+          </button>
           {/* <Link to='/admin'>
             <button className={styles.btn}>Administración de usuarios</button>
           </Link> */}
         </div>
+      </div>
+      <div className={styles.allCont}>
+        {opButtons && (
+          <div className={styles.opCont}>
+            <div>
+              <h2>Configuración actual</h2>
+              <label>Frecuencia / Ángulo</label>
+              <h3>LMS time</h3>
+                  <div className={styles.formGroup}>
+                  <div className={styles.angleInput}>
+                  <label>Fecha del dispositivo:</label>
+                  </div>
+                  <div className={styles.angleInput}>
+                  <label>Hora del dispositivo:</label>
+                  </div>
+                  </div>
+                  <br/>
+                  <h3>Rango de ángulos</h3>
+                  <div className={styles.formGroup}>
+                    <div className={styles.angleInput}>
+                      <label>Ángulo inicial</label>
+                    </div>
+                    <div className={styles.angleInput}>
+                      <label>Ángulo final</label>
+                    </div>
+                    </div>
             </div>
-          <div className={styles.allCont}>
-
+            <div className={styles.btnCont}>
+            <button className={styles.opButtons}>Conectar</button>
+            <button className={styles.opButtons}>Stand by</button>
+            <button className={styles.opButtons}>Start measurment</button>
+            <button className={styles.opButtons}>Stop measurment</button>
+            </div>
+          </div>
+        )}
           <div className={styles.config}>
               {configBtn && (
                 <form>
@@ -71,13 +109,6 @@ export function Home() {
                 </form>
               )}
           </div>
-          {opButtons && (
-            <div className={styles.btnCont}>
-                <button className={styles.opButtons}>Stand by</button>
-                <button className={styles.opButtons}>Start measurment</button>
-                <button className={styles.opButtons}>Stop measurment</button>
-              </div>
-            )}
             </div>
       </div>
     )

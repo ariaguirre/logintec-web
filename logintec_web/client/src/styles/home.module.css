@@ -9,6 +9,30 @@ body{
   flex-direction: column;
 }
 
+.opCont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  /* border: 2px solid blue; */
+  /* background-color: rgba(0, 0, 0, 0.5);  */
+  position: relative;
+  top: 1rem;
+  width: 40%;
+  height: 100%;
+  margin-left: 30%;
+}
+
 .container{
   position: fixed;
   left: 0;
@@ -112,9 +136,8 @@ body{
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: -5rem;
+  align-items:center;
+  justify-content:center;
 }
 
 .opButtons{
@@ -131,6 +154,7 @@ body{
   margin-bottom: 15px;   
   margin-top: 12px;   
   margin-right: 12px;   
+  transition: background-color 0.3s;
 }
 .opButtons:hover {
   background-color: #c4bfc1; 
