@@ -37,24 +37,20 @@ export function Home() {
           <div className={styles.opCont}>
             <div>
               <h2>Configuración actual</h2>
-              <label>Frecuencia / Ángulo</label>
+              <label>Frecuencia / Ángulo  XXXX</label>
               <h3>LMS time</h3>
                   <div className={styles.formGroup}>
-                  <div className={styles.angleInput}>
-                  <label>Fecha del dispositivo:</label>
-                  </div>
-                  <div className={styles.angleInput}>
-                  <label>Hora del dispositivo:</label>
-                  </div>
+                  <label>Fecha del dispositivo:  XXXX</label>
+                  <label>Hora del dispositivo:   XXXX</label>
                   </div>
                   <br/>
                   <h3>Rango de ángulos</h3>
                   <div className={styles.formGroup}>
                     <div className={styles.angleInput}>
-                      <label>Ángulo inicial</label>
+                      <label>Ángulo inicial  XXXX  </label>
                     </div>
                     <div className={styles.angleInput}>
-                      <label>Ángulo final</label>
+                      <label>Ángulo final  XXXX  </label>
                     </div>
                     </div>
             </div>
@@ -73,11 +69,23 @@ export function Home() {
                   <div className={styles.angleInput}>
                   <label>Frecuencia / Ángulo</label>
                   <select>
-                    <option>Opcion</option>
-                    <option>Opcion</option>
-                    <option>Opcion</option>
-                    <option>Opcion</option>
-                    <option>Opcion</option>
+                    <option>25Hz / 0.1667°</option>
+                    <option>25Hz / 0.25°</option>
+                    <option>35Hz / 0.25°</option>
+                    <option>35Hz / 0.5°</option>
+                    <option>50Hz / 0.3333°</option>
+                    <option>50Hz / 0.5°</option>
+                    <option>75Hz / 0.5°</option>
+                    <option>75Hz / 1°</option>
+                    <option>100Hz / 0.6667°</option>
+                    <option>100Hz / 1°</option>
+                    <option>50Hz / 0.1667° interlaced</option>
+                    <option>75Hz / 0.25° interlaced</option>
+                    <option>100Hz / 0.1667° interlaced</option>
+                    <option>100Hz / 0.3333° interlaced</option>
+                    <option>100Hz / 0.5° interlaced</option>
+                    <option>25Hz / 0.083° interlaced</option>
+                    <option>25Hz / 0.042° interlaced</option>
                   </select>
                   </div>
                   <br/>
