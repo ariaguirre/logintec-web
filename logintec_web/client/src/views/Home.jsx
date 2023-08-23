@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/home.module.css';
+// import {get_connection} from '../../../api/functions.py'
+import axios from 'axios';
 
 export function Home() {
   const [opButtons, setOpButtons] = useState(false);
   const [configBtn, setConfigBtn] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleOpButtons = () => {
     if(configBtn==true) setConfigBtn(false);
@@ -14,6 +17,18 @@ export function Home() {
   const handleConfigBtn = () => {
     if(opButtons==true) setOpButtons(false);
     setConfigBtn(!configBtn);
+  };
+
+  const handleConnect = async () => {
+    try{
+      const response = await axios.get('http://127.0.0.1:8000/');
+      const message = response.data.message;
+      console.log('message:', message);
+      alert(message)
+    } catch(error) {
+      console.log('Error connecting:', error)
+      alert(message)
+    }
   };
 
   return (
@@ -55,7 +70,7 @@ export function Home() {
                     </div>
             </div>
             <div className={styles.btnCont}>
-            <button className={styles.opButtons}>Conectar</button>
+            <button className={styles.opButtons} onClick={handleConnect} >Conectar</button>
             <button className={styles.opButtons}>Stand by</button>
             <button className={styles.opButtons}>Start measurment</button>
             <button className={styles.opButtons}>Stop measurment</button>
