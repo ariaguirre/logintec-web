@@ -19,18 +19,3 @@ def connect(request):
         return JsonResponse({'message': 'Conectado.'})
     else:
         return JsonResponse({'message': 'Error en la conexión.'})
-
-
-    # return JsonResponse({'message': response})
-
-
-
-
-
-# def get_connection_endpoint(request):
-#     host = "10.1.100.105"
-#     port = 2112; 
-    
-#     result = get_connection(host, port)
-    
-#     return JsonResponse({'message': result})
