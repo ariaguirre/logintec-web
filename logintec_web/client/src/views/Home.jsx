@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../styles/home.module.css';
-// import {get_connection} from '../../../api/functions.py'
 import axios from 'axios';
 
 export function Home() {
   const [opButtons, setOpButtons] = useState(false);
   const [configBtn, setConfigBtn] = useState(false);
-  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
+  const [start, setStart] = useState('');
 
   const handleOpButtons = () => {
     if(configBtn==true) setConfigBtn(false);
@@ -23,13 +22,32 @@ export function Home() {
     try{
       const response = await axios.get('http://127.0.0.1:8000/');
       const message = response.data.message;
-      console.log('message:', message);
       alert(message)
     } catch(error) {
       console.log('Error connecting:', error)
       alert(message)
     }
   };
+
+  const handleStatus = async () => {
+    try{
+      const response = await axios.get('http://127.0.0.1:8000/standby/');
+      setStatus(response.data);
+    } catch(error){
+      console.log('Error:', error);
+      setStatus(response.data);
+    }
+  }
+
+  const handleStart = async () => {
+    try{
+      const response = await axios.get('http://127.0.0.1:8000/start/');
+      setStart(response.data.message);
+    } catch (error){
+      console.log('Error:', error)
+      setStart(response.data.message)
+    }
+  }
 
   return (
     <div>
@@ -42,9 +60,6 @@ export function Home() {
           <button className={`${styles.btn} ${opButtons ? styles.activeButton : ''}`} onClick={handleOpButtons}>
             Operación
           </button>
-          {/* <Link to='/admin'>
-            <button className={styles.btn}>Administración de usuarios</button>
-          </Link> */}
         </div>
       </div>
       <div className={styles.allCont}>
@@ -71,10 +86,13 @@ export function Home() {
             </div>
             <div className={styles.btnCont}>
             <button className={styles.opButtons} onClick={handleConnect} >Conectar</button>
-            <button className={styles.opButtons}>Stand by</button>
-            <button className={styles.opButtons}>Start measurment</button>
+            <button className={styles.opButtons} onClick={handleStatus}>Stand by</button>
+            <button className={styles.opButtons} onClick={handleStart}>Start measurment</button>
             <button className={styles.opButtons}>Stop measurment</button>
             </div>
+            {status}
+            <br/>
+            {start}
           </div>
         )}
           <div className={styles.config}>

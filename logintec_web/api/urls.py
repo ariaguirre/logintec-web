@@ -1,17 +1,10 @@
 from django.urls import path
 from django.http import HttpResponse, JsonResponse
-from .views import main
-from .views import connect
-from .import views
-from .functions import get_connection
+from .views import connect, stand_by, start_measure, stop_measure
 
 urlpatterns = [
     path('', connect),
+    path('standby/', stand_by),
+    path('start/', start_measure),
+    path('stop/', stop_measure),
 ]
-
-# def connect(request):
-#     host = request.GET.get('host')
-#     port = int(request.GET.get('port'))
-#     result = get_connection(host, port)
-    
-#     return JsonResponse({'message': result})

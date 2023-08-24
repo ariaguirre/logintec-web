@@ -1,5 +1,5 @@
 body{
-  background-color:#f0f0f0;
+  background-color:#ded9d9;
 }
 
 .allCont{
@@ -115,7 +115,7 @@ body{
 }
 
 .btn{
-    width: 300px; 
+    width: 250px; 
     padding: 15px; 
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-size: 17px;
