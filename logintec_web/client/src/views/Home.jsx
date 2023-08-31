@@ -7,6 +7,9 @@ export function Home() {
   const [configBtn, setConfigBtn] = useState(false);
   const [status, setStatus] = useState('');
   const [start, setStart] = useState('');
+  const [time, setTime] = useState('');
+  const [date, setDate] = useState('');
+  const [scan, setScan] = useState('');
 
   const handleOpButtons = () => {
     if(configBtn==true) setConfigBtn(false);
@@ -20,7 +23,7 @@ export function Home() {
 
   const handleConnect = async () => {
     try{
-      const response = await axios.get('http://127.0.0.1:8000/');
+      const response = await axios.get('http://127.0.0.1:8000/connect/');
       const message = response.data.message;
       alert(message)
     } catch(error) {
@@ -29,10 +32,15 @@ export function Home() {
     }
   };
 
-  const handleStatus = async () => {
+  const handleStatus = async (event) => {
     try{
+      event.preventDefault();
       const response = await axios.get('http://127.0.0.1:8000/standby/');
       setStatus(response.data);
+      const time = response.data.split("Hora: ")[1].split(" -")[0];
+      setTime(time)
+      const date = response.data.split("Fecha: ")[1];
+      setDate(date)
     } catch(error){
       console.log('Error:', error);
       setStatus(response.data);
@@ -46,6 +54,16 @@ export function Home() {
     } catch (error){
       console.log('Error:', error)
       setStart(response.data.message)
+    }
+  }
+
+  const handleScan = async () => {
+    try{
+      const response = await axios.get('http://127.0.0.1:8000/scandata/');
+      setScan(response.data)
+    } catch(error){
+      console.log('Error scanning: ', error);
+      setScan(response.data);
     }
   }
 
@@ -69,30 +87,27 @@ export function Home() {
               <h2>Configuración actual</h2>
               <label>Frecuencia / Ángulo  XXXX</label>
               <h3>LMS time</h3>
-                  <div className={styles.formGroup}>
-                  <label>Fecha del dispositivo:  XXXX</label>
-                  <label>Hora del dispositivo:   XXXX</label>
-                  </div>
-                  <br/>
+                  <p>Fecha del dispositivo: {date}</p>
+                  <p>Hora del dispositivo: {time}</p>
                   <h3>Rango de ángulos</h3>
-                  <div className={styles.formGroup}>
                     <div className={styles.angleInput}>
                       <label>Ángulo inicial  XXXX  </label>
                     </div>
                     <div className={styles.angleInput}>
                       <label>Ángulo final  XXXX  </label>
                     </div>
-                    </div>
             </div>
             <div className={styles.btnCont}>
             <button className={styles.opButtons} onClick={handleConnect} >Conectar</button>
             <button className={styles.opButtons} onClick={handleStatus}>Stand by</button>
             <button className={styles.opButtons} onClick={handleStart}>Start measurment</button>
-            <button className={styles.opButtons}>Stop measurment</button>
+            <button className={styles.opButtons} onClick={handleScan}>Scan</button>
             </div>
             {status}
             <br/>
             {start}
+            <br/>
+            {scan}
           </div>
         )}
           <div className={styles.config}>
@@ -123,17 +138,14 @@ export function Home() {
                   </div>
                   <br/>
                   <h3>LMS time</h3>
-                  <div className={styles.formGroup}>
                   <div className={styles.angleInput}>
-                  <label>Fecha del dispositivo:</label>
-                  <input type='text'/>
+                  <label>Fecha del dispositivo: {date}</label>
                   </div>
                   <div className={styles.angleInput}>
-                  <label>Hora del dispositivo:</label>
-                  <input type='text'/>
+                  <label>Hora del dispositivo:     {time}</label>
                   </div>
-                  </div>
-                  <button className={styles.boton}>Actualizar</button>
+                  <br/>
+                  <button className={styles.boton} onClick={handleStatus}>Actualizar</button>
                   <br/>
                     <h3>Rango de ángulos</h3>
                   <div className={styles.formGroup}>

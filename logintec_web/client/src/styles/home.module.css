@@ -53,20 +53,18 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
-  /* border: 2px solid blue; */
   /* background-color: rgba(0, 0, 0, 0.5);  */
   position: relative;
   top: 1rem;
-  width: 40%;
+  width: 50%;
   height: 100%;
   margin-left: 30%;
 }
 
 .config form {
-  margin-top: -3rem;
-  /* border: 2px solid blue; */
+  margin-top: -30%;
   background-color: #fff;
+  height: auto;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -104,6 +102,7 @@ body{
   width: 100%;
   margin-left: -1rem;
   margin-top: -1rem;
+  position: relative;
   }
 
 .menus{

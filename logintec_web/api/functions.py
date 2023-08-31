@@ -22,24 +22,24 @@ def get_connection():
         return b""
 
 
-def set_timestamp():
-    get_connection()
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    now = datetime.now()
-    año=now.year
-    mes=now.month
-    dia=now.day
-    hora=now.hour
-    minuto=now.minute
-    segundo=now.second
-    microseg=now.microsecond
-    print(now)
+# def set_timestamp():
+#     get_connection()
+#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     now = datetime.now()
+#     año=now.year
+#     mes=now.month
+#     dia=now.day
+#     hora=now.hour
+#     minuto=now.minute
+#     segundo=now.second
+#     microseg=now.microsecond
+#     print(now)
 
-    fechaactual='\x02sMN LSPsetdatetime +{} +{} +{} +{} +{} +{} +{}\x03'.format(año, mes, dia, hora, minuto, segundo, microseg)
-    s.send(fechaactual.encode())
-    print(fechaactual)
-    datarecive = s.recv(1000)
-    print(datarecive)
+#     fechaactual='\x02sMN LSPsetdatetime +{} +{} +{} +{} +{} +{} +{}\x03'.format(año, mes, dia, hora, minuto, segundo, microseg)
+#     s.send(fechaactual.encode())
+#     print(fechaactual)
+#     datarecive = s.recv(1000)
+#     print(datarecive)
 
 
 def get_status():
@@ -97,7 +97,7 @@ def stop():
         port = 2112 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host,port))
-        message = '\x02sRN STlms\x03'   #status stand_by
+        message = '\x02sRN STlms\x03'  
         print("Connected from django get status")
         #print(message.encode())
         # print(binascii.hexlify(message.encode()))
@@ -121,12 +121,15 @@ if __name__ == '__main__':
     start()
     stop()
 
-#scandata para medir
+# scandata para medir
+
 # Altura de sensor
 # distancia sensor a inicio de caja
 # ancho maximo de caja
 # alto maximo de caja
 
+
+# Pasar medidas a decimales 
 # angular resolution se lo doy yo (saltitos)
 # de aca se saca angulo inicial y final 
 # arco/alto tangente (angulo inicial) distancia de aja

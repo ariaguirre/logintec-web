@@ -39,6 +39,7 @@
     background-color: #571b34; 
     color: #fff; 
     border: none; 
+    margin-left: 6%;
     border-radius: 5px;
     cursor: pointer; 
   }
@@ -47,3 +48,12 @@
     background-color: #411427; 
   }
   
+
+select{
+  width: 52%;
+  padding: 8px;
+  margin-bottom: 10px;
+  margin-left: 5%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

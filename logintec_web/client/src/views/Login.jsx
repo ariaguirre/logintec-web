@@ -22,16 +22,11 @@ export function Login() {
         <h1 className={styles.header}>Ingrese a su cuenta</h1>
         <br/>
         <form className={styles.form}>
-            <div>
-                    <input
-                    type='email'
-                    id='email'
-                    placeholder="Email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    required
-                    />
-            </div>
+        <select>
+            <option>Cliente autorizado</option>
+            <option>Mantenimiento</option>
+            <option>Servicio</option>
+        </select>
             <div>
                     <input
                     type='password'
