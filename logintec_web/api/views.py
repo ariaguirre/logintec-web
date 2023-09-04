@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .functions import get_connection, get_status, start, stop
-from .scanFunctions import get_scandata, get_data
+from .scanFunctions import get_scandata, get_data, scanConfig, output
 import binascii
 
 # & c:/Users/Depo01/Desktop/logintec-web/logintec_web/venv/Scripts/Activate.ps1
@@ -43,15 +43,23 @@ def start_measure(request):
 def stop_measure(request):
     data = stop()
     return HttpResponse(data)
+
+def get_output(request):
+    data= output()
+    return HttpResponse(data)
     
 
 # Data views
 
 def scandata(request):
-    puntos = 205
-    data = get_scandata(puntos)
-    response = "\n".join(data) #Une los elementos de la lista con saltos de linea
-    return HttpResponse(response)
+    # puntos = 205
+    data = get_scandata()
+    # response = "\n".join(data) #Une los elementos de la lista con saltos de linea
+    return HttpResponse(data)
+
+def scan_config(request):
+    data = scanConfig()
+    return HttpResponse(data)
 
 
 def analyze_data(request):

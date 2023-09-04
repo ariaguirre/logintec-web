@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import styles from '../styles/login.module.css/'
 
 export function Login() {
@@ -37,7 +38,9 @@ export function Login() {
                     required
                     />
             </div>
+            <Link to="/home">
             <button className={styles.btn}>Iniciar sesión</button>
+            </Link>
         </form>
 
     </div>

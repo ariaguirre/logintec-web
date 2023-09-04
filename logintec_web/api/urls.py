@@ -1,6 +1,6 @@
 from django.urls import path
 from django.http import HttpResponse, JsonResponse
-from .views import connect, stand_by, start_measure, stop_measure, scandata, analyze_data
+from .views import connect, stand_by, start_measure, stop_measure, scandata, analyze_data, scan_config, get_output
 
 urlpatterns = [
     path('connect/', connect),
@@ -9,4 +9,6 @@ urlpatterns = [
     path('stop/', stop_measure),
     path('scandata/', scandata),
     path('analyze/', analyze_data),
+    path('config/', scan_config),
+    path('output/', get_output),
 ]
