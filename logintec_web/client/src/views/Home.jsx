@@ -10,6 +10,7 @@ export function Home() {
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
   const [scan, setScan] = useState('');
+  const [angle, setAngle] = useState('');
 
   const handleOpButtons = () => {
     if(configBtn==true) setConfigBtn(false);
@@ -60,6 +61,12 @@ export function Home() {
   const handleScan = async () => {
     try{
       const response = await axios.get('http://127.0.0.1:8000/scandata/');
+      console.log(response.data)
+      const arr = response.data.split(" ");
+      const last = parseInt(arr[arr.length -1], 16);
+      const angle = Math.floor(last/10000);
+      console.log(angle)
+      setAngle(angle)
       setScan(response.data)
     } catch(error){
       console.log('Error scanning: ', error);
@@ -85,16 +92,16 @@ export function Home() {
           <div className={styles.opCont}>
             <div>
               <h2>Configuración actual</h2>
-              <label>Frecuencia / Ángulo  XXXX</label>
+              <label>Frecuencia / Resolución  XXXX</label>
               <h3>LMS time</h3>
                   <p>Fecha del dispositivo: {date}</p>
                   <p>Hora del dispositivo: {time}</p>
                   <h3>Rango de ángulos</h3>
                     <div className={styles.angleInput}>
-                      <label>Ángulo inicial  XXXX  </label>
+                      <label>Ángulo inicial  {angle}°  </label>
                     </div>
                     <div className={styles.angleInput}>
-                      <label>Ángulo final  XXXX  </label>
+                      <label>Ángulo final  85°  </label>
                     </div>
             </div>
             <div className={styles.btnCont}>

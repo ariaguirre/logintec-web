@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .functions import get_connection, get_status, start, stop
-from .scanFunctions import get_scandata, get_data, scanConfig, output
+from .scanFunctions import get_scandata, scanConfig, get_output, get_data, clean_data
 import binascii
 
 # & c:/Users/Depo01/Desktop/logintec-web/logintec_web/venv/Scripts/Activate.ps1
@@ -44,30 +44,29 @@ def stop_measure(request):
     data = stop()
     return HttpResponse(data)
 
-def get_output(request):
-    data= output()
-    return HttpResponse(data)
-    
 
 # Data views
 
 def scandata(request):
     # puntos = 205
     data = get_scandata()
-    # response = "\n".join(data) #Une los elementos de la lista con saltos de linea
     return HttpResponse(data)
+
+
+def list(request):
+    data = get_data()
+    return HttpResponse(data)
+
+def clean(request):
+    data = clean_data()
+    return HttpResponse(data)
+
 
 def scan_config(request):
     data = scanConfig()
     return HttpResponse(data)
 
 
-def analyze_data(request):
-    puntos = 205
-    angulo_inicial = 17
-    salto = 1/3
-    angulo_final = 85
-    distancia = 270
-    h_sensor=820
-    get_data(puntos, angulo_inicial, angulo_final, salto, distancia, h_sensor)
-    return JsonResponse({'message': 'Datos analizados y guardados correctamente.'})
+def output(request):
+    data= get_output()
+    return HttpResponse(data)
