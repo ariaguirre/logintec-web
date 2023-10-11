@@ -11,6 +11,10 @@ export function Home() {
   const [date, setDate] = useState('');
   const [scan, setScan] = useState('');
   const [angle, setAngle] = useState('');
+  const[sensorHeight, setSensorHeight] = useState(840);
+  const [graph, setGraph] = useState('');
+  // const [showText, setShowText] = useState(true);
+
 
   const handleOpButtons = () => {
     if(configBtn==true) setConfigBtn(false);
@@ -60,7 +64,7 @@ export function Home() {
 
   const handleScan = async () => {
     try{
-      const response = await axios.get('http://127.0.0.1:8000/scandata/');
+      const response = await axios.get(`http://127.0.0.1:8000/scandata/?height=${sensorHeight}`);
       console.log(response.data)
       const arr = response.data.split(" ");
       const last = parseInt(arr[arr.length -1], 16);
@@ -73,6 +77,28 @@ export function Home() {
       setScan(response.data);
     }
   }
+
+  const handleSensor = (event) =>{
+    event.preventDefault();
+    setSensorHeight(event.target.value)
+  }
+
+  const handleGraphic = async () => {
+    try{
+      const list = await axios.get(`http://127.0.0.1:8000/list/?height=${parseFloat(sensorHeight)}`);
+      console.log('list data',list.data)
+      const cleaned = await axios.get('http://127.0.0.1:8000/clean/');
+      const graph = cleaned.data;
+      // setGraph(graph)
+      console.log(graph)
+    } catch(error){
+      console.log('Error handling graphic:', error);
+    }
+  }
+
+  // const handleClean = () => {
+  //   setShowText(false);
+  // };
 
   return (
     <div>
@@ -93,85 +119,85 @@ export function Home() {
             <div>
               <h2>Configuración actual</h2>
               <label>Frecuencia / Resolución  XXXX</label>
+              <br/>
+              <br/>
+              <label>Altura del sensor: </label> 
+              {sensorHeight}
               <h3>LMS time</h3>
-                  <p>Fecha del dispositivo: {date}</p>
-                  <p>Hora del dispositivo: {time}</p>
-                  <h3>Rango de ángulos</h3>
-                    <div className={styles.angleInput}>
-                      <label>Ángulo inicial  {angle}°  </label>
-                    </div>
-                    <div className={styles.angleInput}>
-                      <label>Ángulo final  85°  </label>
-                    </div>
+              <p>Fecha del dispositivo: {date}</p>
+              <p>Hora del dispositivo: {time}</p>
+              <h3>Rango de ángulos</h3>
+              <div className={styles.angleInput}>
+                <label>Ángulo inicial  {angle}°  </label>
+              </div>
+              <div className={styles.angleInput}>
+                <label>Ángulo final  85°  </label>
+              </div>
             </div>
             <div className={styles.btnCont}>
-            <button className={styles.opButtons} onClick={handleConnect} >Conectar</button>
-            <button className={styles.opButtons} onClick={handleStatus}>Stand by</button>
-            <button className={styles.opButtons} onClick={handleStart}>Start measurment</button>
-            <button className={styles.opButtons} onClick={handleScan}>Scan</button>
+              <button className={styles.opButtons} onClick={handleConnect}>Conectar</button>
+              <button className={styles.opButtons} onClick={handleStatus}>Stand by</button>
+              <button className={styles.opButtons} onClick={handleStart}>Start measurment</button>
+              <button className={styles.opButtons} onClick={handleScan}>Scan</button>
+              <button className={styles.opButtons} onClick={handleGraphic}>Graph</button>
+              {/* <button className={styles.opButtons} onClick={handleClean}>Clean</button> */}
+              <div>
+                {/* <img src={`http://127.0.0.1:8000/${graphImageUrl}`} alt="Gráfico" /> */}
+              </div>
             </div>
-            {status}
-            <br/>
-            {start}
-            <br/>
-            {scan}
+            {/* {showText && ( */}
+              <div>
+                {status}
+                <br />
+                {start}
+                <br />
+                {scan}
+              </div>
+            {/* )} */}
           </div>
         )}
-          <div className={styles.config}>
-              {configBtn && (
-                <form>
-                  <h2>Configuración del sensor</h2>
-                  <div className={styles.angleInput}>
-                  <label>Frecuencia / Ángulo</label>
-                  <select>
-                    <option>25Hz / 0.1667°</option>
-                    <option>25Hz / 0.25°</option>
-                    <option>35Hz / 0.25°</option>
-                    <option>35Hz / 0.5°</option>
-                    <option>50Hz / 0.3333°</option>
-                    <option>50Hz / 0.5°</option>
-                    <option>75Hz / 0.5°</option>
-                    <option>75Hz / 1°</option>
-                    <option>100Hz / 0.6667°</option>
-                    <option>100Hz / 1°</option>
-                    <option>50Hz / 0.1667° interlaced</option>
-                    <option>75Hz / 0.25° interlaced</option>
-                    <option>100Hz / 0.1667° interlaced</option>
-                    <option>100Hz / 0.3333° interlaced</option>
-                    <option>100Hz / 0.5° interlaced</option>
-                    <option>25Hz / 0.083° interlaced</option>
-                    <option>25Hz / 0.042° interlaced</option>
-                  </select>
-                  </div>
-                  <br/>
-                  <h3>LMS time</h3>
-                  <div className={styles.angleInput}>
-                  <label>Fecha del dispositivo: {date}</label>
-                  </div>
-                  <div className={styles.angleInput}>
-                  <label>Hora del dispositivo:     {time}</label>
-                  </div>
-                  <br/>
-                  <button className={styles.boton} onClick={handleStatus}>Actualizar</button>
-                  <br/>
-                    <h3>Rango de ángulos</h3>
-                  <div className={styles.formGroup}>
-                    <div className={styles.angleInput}>
-                      <label>Ángulo inicial</label>
-                      <input type='text' />
-                    </div>
-                    <div className={styles.angleInput}>
-                      <label>Ángulo final</label>
-                      <input type='text' />
-                    </div>
-                    </div>
-                    <button className={styles.actBoton}>Actualizar configuración</button>
-                </form>
-              )}
-          </div>
-            </div>
+        <div className={styles.config}>
+          {configBtn && (
+            <form>
+              <h2>Configuración del sensor</h2>
+              <div className={styles.angleInput}>
+                <label>Frecuencia / Ángulo</label>
+                <select>
+                  <option>25Hz / 0.1667°</option>
+                  {/* ... (other options) */}
+                </select>
+                <br />
+                <label>Altura del sensor</label>
+                <input type='number' value={sensorHeight} onChange={handleSensor} />
+              </div>
+              <br />
+              <h3>LMS time</h3>
+              <div className={styles.angleInput}>
+                <label>Fecha del dispositivo: {date}</label>
+              </div>
+              <div className={styles.angleInput}>
+                <label>Hora del dispositivo: {time}</label>
+              </div>
+              <br />
+              <button className={styles.boton} onClick={handleStatus}>Actualizar</button>
+              <br />
+              <h3>Rango de ángulos</h3>
+              <div className={styles.formGroup}>
+                <div className={styles.angleInput}>
+                  <label>Ángulo inicial</label>
+                  <input type='text' />
+                </div>
+                <div className={styles.angleInput}>
+                  <label>Ángulo final</label>
+                  <input type='text' />
+                </div>
+              </div>
+              <button className={styles.actBoton}>Actualizar configuración</button>
+            </form>
+          )}
+        </div>
       </div>
-    )
-  }
-  
+    </div>
+  );
+}
   

@@ -3,6 +3,8 @@ from django.http import HttpResponse, JsonResponse
 from .functions import get_connection, get_status, start, stop
 from .scanFunctions import get_scandata, scanConfig, get_output, get_data, clean_data
 import binascii
+import numpy as np
+import matplotlib.pyplot as plt
 
 # & c:/Users/Depo01/Desktop/logintec-web/logintec_web/venv/Scripts/Activate.ps1
 
@@ -54,7 +56,8 @@ def scandata(request):
 
 
 def list(request):
-    data = get_data()
+    sensorHeight = request.GET.get('height', 840) #default value
+    data = get_data(sensorHeight)
     return HttpResponse(data)
 
 def clean(request):

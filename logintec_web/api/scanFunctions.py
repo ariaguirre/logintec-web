@@ -3,6 +3,7 @@ from math import *
 from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
+import threading
 
 def ancho(grados, diagonal, distY):
     return round(((math.sin(math.radians(grados))*diagonal)-distY), 2)
@@ -34,7 +35,8 @@ def get_scandata():
 
     return result
 
-def get_data():     
+def get_data(sensorHeight):  
+    sensorHeight = float(sensorHeight)   
     data = get_scandata()
     # print('SCANDATA', data)
     words = data.split()
@@ -48,21 +50,21 @@ def get_data():
     for char in mediciones:
         if char != ' ':
             group += char
-            if len(group) == 3:
-                if factor[0] == '4':
-                    decimal.append((int(group, 16))*2)
-                    group = ''
-                if factor[0] == '3':
-                    decimal.append(int(group, 16))
-                    group = ''
-    decimal = [dec for dec in decimal if dec < 1458]
+            if factor[0] == '4':
+                decimal.append((int(group, 16))*2)
+                group = ''
+            if factor[0] == '3':
+                decimal.append(int(group, 16))
+                group = ''
+    print('decimal', decimal)
+    decimal = [dec for dec in decimal if dec < 1458]  # /2 --> 729
     decimal_str = [str(dec) for dec in decimal]
     puntos = len(decimal_str)
     print('puntos: ', puntos)
     result = ' '.join(decimal_str)
-    # print('RESULT', result)
     dist_objeto=270
-    h_sensor=820
+    h_sensor= sensorHeight 
+    print('sensorHeight', sensorHeight)
     salto=1/2
     values = [int(num) for num in result.split()]
     lista = []
@@ -86,6 +88,7 @@ def get_data():
             lista.append([x, b+1, long_laser, alfa, y1, z1])
             # print('lista:', lista)
     lista1 = [item for item in lista if item[4] <= 900]
+    lista2 = [item for item in lista1 if item[5] >= 8]
     minYtotal = min(minYtotal, minY)
     maxZtotal = max(maxZtotal, maxZ)
     medicionesx = int(len(lista1))
@@ -93,11 +96,23 @@ def get_data():
     print('minYtotal', minYtotal)
     print('maxZtotal', maxZtotal)
 
-    return lista1
+    return lista2
 
+
+def plot_graph(allZ, allY):
+    # plt.boxplot(allY, allZ, vert=False)
+    plt.title('Grafico de datos')
+    plt.plot(allY, allZ)
+    plt.savefig('C:/Users/Depo01/Pictures/Graphs')
+    plt.show()
+    plt.close()
+    return 'C:/Users/Depo01/Pictures/Graphs'
 
 def clean_data():
     data = get_data()
+    # print('dataaa', data)
+    num = int(len(data))
+    print('NUMMM', num)
     cleaned = []
 
     for sublist in data:
@@ -107,21 +122,20 @@ def clean_data():
                 negative = True
                 break
         if not negative:
-            cleaned.append(sublist)
-            # print("cleaned", cleaned)
-    
+            cleaned.append(sublist) #Elimina valores negativos
+
+    # print("cleaned", cleaned)
     allY = []
     allZ = []
     for item in cleaned:
         allY.append(item[4])
         allZ.append(item[5])
-    # print('allY', allY)
-    # print('allZ', allZ)
-    
-    plt.boxplot(allZ, allY)
-    plt.show()
+    # allY, allZ
+    print('allY', allY)
+    print('allZ', allZ)
 
-
+    graph_thread = threading.Thread(target=plot_graph, args=(allZ, allY))
+    graph_thread.start()
     mediciones = int(len(cleaned))
     print("Mediciones:", mediciones)
     return cleaned
@@ -157,10 +171,6 @@ def scanConfig():
     s.close()
     return data
     
-# heights = np.random.normal(172, 8, 300)
-# plt.boxplot(heights)
-# plt.show()
-
 
 if __name__ == '__main__':
     get_scandata()
