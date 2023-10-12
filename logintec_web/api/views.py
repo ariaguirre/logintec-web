@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .functions import get_connection, get_status, start, stop
 from .scanFunctions import get_scandata, scanConfig, get_output, get_data, clean_data
 import binascii
@@ -56,12 +57,13 @@ def scandata(request):
 
 
 def list(request):
-    sensorHeight = request.GET.get('height', 840) #default value
+    sensorHeight = request.GET.get('height', 850) #default value
     data = get_data(sensorHeight)
     return HttpResponse(data)
 
 def clean(request):
-    data = clean_data()
+    sensorHeight = request.GET.get('height', 850) #default value
+    data = clean_data(sensorHeight)
     return HttpResponse(data)
 
 

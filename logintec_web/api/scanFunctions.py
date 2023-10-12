@@ -36,7 +36,7 @@ def get_scandata():
     return result
 
 def get_data(sensorHeight):  
-    sensorHeight = float(sensorHeight)   
+    sensorHeightF = int(float(sensorHeight))
     data = get_scandata()
     # print('SCANDATA', data)
     words = data.split()
@@ -56,15 +56,14 @@ def get_data(sensorHeight):
             if factor[0] == '3':
                 decimal.append(int(group, 16))
                 group = ''
-    print('decimal', decimal)
     decimal = [dec for dec in decimal if dec < 1458]  # /2 --> 729
     decimal_str = [str(dec) for dec in decimal]
     puntos = len(decimal_str)
     print('puntos: ', puntos)
     result = ' '.join(decimal_str)
     dist_objeto=270
-    h_sensor= sensorHeight 
-    print('sensorHeight', sensorHeight)
+    h_sensor= sensorHeightF 
+    print('SENSOR HEIGHT', sensorHeightF)
     salto=1/2
     values = [int(num) for num in result.split()]
     lista = []
@@ -108,8 +107,8 @@ def plot_graph(allZ, allY):
     plt.close()
     return 'C:/Users/Depo01/Pictures/Graphs'
 
-def clean_data():
-    data = get_data()
+def clean_data(sensorHeight):
+    data = get_data(sensorHeight)
     # print('dataaa', data)
     num = int(len(data))
     print('NUMMM', num)
@@ -130,9 +129,8 @@ def clean_data():
     for item in cleaned:
         allY.append(item[4])
         allZ.append(item[5])
-    # allY, allZ
-    print('allY', allY)
-    print('allZ', allZ)
+    # print('allY', allY)
+    # print('allZ', allZ)
 
     graph_thread = threading.Thread(target=plot_graph, args=(allZ, allY))
     graph_thread.start()

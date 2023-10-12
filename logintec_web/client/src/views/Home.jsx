@@ -69,7 +69,7 @@ export function Home() {
       const arr = response.data.split(" ");
       const last = parseInt(arr[arr.length -1], 16);
       const angle = Math.floor(last/10000);
-      console.log(angle)
+      // console.log(angle)
       setAngle(angle)
       setScan(response.data)
     } catch(error){
@@ -78,7 +78,7 @@ export function Home() {
     }
   }
 
-  const handleSensor = (event) =>{
+  const handleSensor = async(event) =>{
     event.preventDefault();
     setSensorHeight(event.target.value)
   }
@@ -86,11 +86,11 @@ export function Home() {
   const handleGraphic = async () => {
     try{
       const list = await axios.get(`http://127.0.0.1:8000/list/?height=${parseFloat(sensorHeight)}`);
-      console.log('list data',list.data)
-      const cleaned = await axios.get('http://127.0.0.1:8000/clean/');
+      console.log('sensorHeight FRONT',sensorHeight)
+      const cleaned = await axios.get(`http://127.0.0.1:8000/clean/?height=${parseFloat(sensorHeight)}`);
       const graph = cleaned.data;
       // setGraph(graph)
-      console.log(graph)
+      // console.log(graph)
     } catch(error){
       console.log('Error handling graphic:', error);
     }
@@ -118,7 +118,7 @@ export function Home() {
           <div className={styles.opCont}>
             <div>
               <h2>Configuración actual</h2>
-              <label>Frecuencia / Resolución  XXXX</label>
+              <label>Frecuencia / Resolución: 25Hz / 0.1667°</label>
               <br/>
               <br/>
               <label>Altura del sensor: </label> 
@@ -192,7 +192,7 @@ export function Home() {
                   <input type='text' />
                 </div>
               </div>
-              <button className={styles.actBoton}>Actualizar configuración</button>
+              {/* <button className={styles.actBoton}>Actualizar configuración</button> */}
             </form>
           )}
         </div>
