@@ -65,11 +65,10 @@ export function Home() {
   const handleScan = async () => {
     try{
       const response = await axios.get(`http://127.0.0.1:8000/scandata/?height=${sensorHeight}`);
-      console.log(response.data)
+      // console.log(response.data)
       const arr = response.data.split(" ");
-      const last = parseInt(arr[arr.length -1], 16);
-      const angle = Math.floor(last/10000);
-      // console.log(angle)
+      const penultimateHex = arr[arr.length - 2];
+      const angle = (parseInt(penultimateHex, 16)/10000); 
       setAngle(angle)
       setScan(response.data)
     } catch(error){
