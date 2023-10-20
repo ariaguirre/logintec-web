@@ -95,10 +95,6 @@ export function Home() {
     }
   }
 
-  // const handleClean = () => {
-  //   setShowText(false);
-  // };
-
   return (
     <div>
       <h1 className={styles.header}>Home page (cliente autorizado)</h1>

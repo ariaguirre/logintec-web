@@ -5,6 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import threading
 
+#PYTHONN ENVIRONMENT
+# & c:/Users/Depo01/Desktop/logintec-web/logintec_web/venv/Scripts/Activate.ps1
+
 # FUNCIONES DE MANEJO DEL SCANNER
 
 def ancho(grados, diagonal, distY):

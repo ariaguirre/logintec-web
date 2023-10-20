@@ -7,14 +7,13 @@ import binascii
 import numpy as np
 import matplotlib.pyplot as plt
 
-# & c:/Users/Depo01/Desktop/logintec-web/logintec_web/venv/Scripts/Activate.ps1
 
 def connect(request):
     response = get_connection()
     print("Response:", response)
     print("Hex Response:", binascii.hexlify(response).decode("utf-8"))
 
-    if b'SetAccessMode 1' in response:
+    if b'SetAccessMode 1' in response:      #Connect to sensor
         return JsonResponse({'message': 'Conectado.'})
     else:
         return JsonResponse({'message': 'Error en la conexión.'})
@@ -28,7 +27,7 @@ def stand_by(request):
     date_part = parts[7] 
     time_part = parts[5]  
     
-    response = f" {data} <br/> Hora: {time_part} - Fecha: {date_part}"
+    response = f" {data} <br/> Hora: {time_part} - Fecha: {date_part}"      #Get sensor status
     return HttpResponse(response)  
 
 
@@ -37,7 +36,7 @@ def start_measure(request):
     print('data', data)
     print("Hex Response:", binascii.hexlify(data).decode("utf-8"))
 
-    if b'LMCstartmeas 0' in data:
+    if b'LMCstartmeas 0' in data:           #Start measuring. Detener con "stand by"
         return JsonResponse({'message': 'Iniciando medicion.'})
     else:
         return JsonResponse({'message': 'Error en el inicio de medicion.'})
@@ -51,7 +50,6 @@ def stop_measure(request):
 # Data views
 
 def scandata(request):
-    # puntos = 205
     data = get_scandata()
     return HttpResponse(data)
 
